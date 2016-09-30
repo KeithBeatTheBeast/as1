@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_habit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.keith.kgmills_habittracker.newHabitActivity">
+
+    <TextView
+        android:text="Enter a new habit:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/newHabitBanner"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/newHabitName"
+        android:layout_below="@+id/newHabitBanner"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Name:" />
+
+    <TextView
+        android:text="Days of the week?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/daysTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/newHabitName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <CheckBox
+        android:text="Sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/daysTitle"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/sundaySwitch"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:text="Wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tuesdaySwitch"
+        android:layout_alignParentStart="true"
+        android:id="@+id/wednesdaySwitch"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:text="Thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wednesdaySwitch"
+        android:layout_alignParentStart="true"
+        android:id="@+id/thursdaysSwitch"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:text="Saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fridaySwitch"
+        android:layout_alignParentStart="true"
+        android:id="@+id/saturdaySwitch"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:text="Friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fridaySwitch"
+        android:layout_below="@+id/thursdaysSwitch"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:text="Monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mondaySwitch"
+        android:layout_below="@+id/sundaySwitch"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Optional: Choose Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/saturdaySwitch"
+        android:layout_alignParentStart="true"
+        android:id="@+id/dateBanner"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <Button
+        android:text="Create New Habit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/createNewHabitButton"
+        android:layout_alignParentEnd="true"
+        android:onClick="newHabitClick"/>
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_below="@+id/dateBanner"
+        android:layout_alignParentStart="true"
+        android:id="@+id/yearEditText"
+        android:selectAllOnFocus="false" />
+
+    <CheckBox
+        android:text="Tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tuesdaySwitch"
+        android:layout_below="@+id/mondaySwitch"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/dayEditText"
+        android:layout_alignBaseline="@+id/monthEditText"
+        android:layout_alignBottom="@+id/monthEditText"
+        android:layout_toEndOf="@+id/monthEditText" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/monthEditText"
+        android:layout_below="@+id/dateBanner"
+        android:layout_toEndOf="@+id/yearEditText" />
+
+</RelativeLayout>
