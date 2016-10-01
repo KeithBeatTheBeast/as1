@@ -5,8 +5,6 @@ package com.example.keith.kgmills_habittracker;
  * Core class of Assignment 1: Habit
  */
 
-// TO-DO add number of times completed in a day!
-    // And the output strings for such a number.
 public class Habit {
 
     private String name;               // As per
@@ -16,6 +14,7 @@ public class Habit {
     private Integer daysToComplete;    // Number of relevant days since creation
     private Integer daysComplete;      // Days complete since creation
     private Integer daysMissed;        // Days missed since creation
+    private Integer overTimeToday;     // Times additionally completed before reset.
     private Integer overTimeDays;      // For instances when habit is completed twice or more
                                        // in one day
     // Simple constructor
@@ -27,6 +26,7 @@ public class Habit {
         this.daysToComplete = 1;
         this.daysComplete= 0;
         this.daysMissed = 0;
+        this.overTimeToday = 0;
         this.overTimeDays = 0;
     }
 
@@ -39,7 +39,10 @@ public class Habit {
             this.daysComplete += 1;
         }
         // If you have
-        else { this.overTimeDays += 1;}
+        else {
+            this.overTimeToday += 1;
+            this.overTimeDays += 1;
+        }
     }
 
     // Check if this is a day I want to do the habit.
@@ -56,6 +59,7 @@ public class Habit {
 
         this.daysToComplete += 1;
         this.dailyCompletion = false;
+        this.overTimeToday = 0;
     }
 
     // Info to user typically done through a toast. Here is the string for it.
@@ -65,7 +69,21 @@ public class Habit {
                 "Days for habit complete: " + this.daysComplete.toString() +
                 "/" + this.daysToComplete.toString() + ". " +
                 "Days missed: " + this.daysMissed.toString() +
-                ". Overtime days: " + this.overTimeDays.toString();
+                ". Overtime: " + this.overTimeDays.toString();
+    }
+
+    @Override
+    public String toString() {
+        String answer = this.name;
+        if (this.dailyCompletion) {
+            answer += " | Complete";
+        }
+        if (this.overTimeToday > 0) {
+            answer += " with " +
+                    this.overTimeToday +
+                    " overtime.";
+        }
+        return answer;
     }
 
     // Standard getters, used for JUNIT testing
@@ -95,13 +113,5 @@ public class Habit {
 
     public Integer getOverTimeDays() {
         return overTimeDays;
-    }
-
-    @Override
-    public String toString() {
-        if (this.dailyCompletion) {
-            return this.name + " | Complete.";
-        }
-        return this.name;
     }
 }

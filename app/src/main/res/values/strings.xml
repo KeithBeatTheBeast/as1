@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Kgmills-HabitTracker</string>
+    <string name="addHabit">Add Habits</string>
+    <string name="delHabit">Delete Habits</string>
+    <string name="Sunday">Sunday</string>
+    <string name="Monday">Monday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Friday">Friday</string>
+    <string name="Saturday">Saturday</string>
+    <string name="createNew">Create New Habit</string>
+    <string name="optional">Optional: Choose Date</string>
+    <string name="days">Days of the week?</string>
+    <string name="newName">Name:</string>
+    <string name="enterNew">Enter a new habit:</string>
+    <string name="del">DELETE</string>
 </resources>

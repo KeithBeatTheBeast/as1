@@ -11,7 +11,7 @@
     tools:context="com.example.keith.kgmills_habittracker.habitsViewActivity">
 
     <Button
-        android:text="Add New Habit"
+        android:text="@string/addHabit"
         android:onClick="addNewHabitIntent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:longClickable="true" />
 
     <Button
-        android:text="Delete Habits"
+        android:text="@string/delHabit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/deleteHabitButton"

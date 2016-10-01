@@ -9,14 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-/** To do list according to notes:
-    For the random strings held here and there, a string holder class analogous to strings.xml
-    Strings.xml, do it
-    Cannot add multiples of the same habit by name.
-    When new habit added, clear habit stream
-    Toast when no date selected.
- Be sure to make sure the habits are refreshed day by day.
- */
 public class habitsViewActivity extends AppCompatActivity {
 
     private ListView activeHabitsListView;

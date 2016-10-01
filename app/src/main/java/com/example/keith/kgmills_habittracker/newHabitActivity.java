@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class newHabitActivity extends AppCompatActivity {
 
     private String[] newHabitDate;
@@ -32,19 +34,14 @@ public class newHabitActivity extends AppCompatActivity {
         this.monthText = (EditText) findViewById(R.id.monthEditText);
         this.dayText = (EditText) findViewById(R.id.dayEditText);
 
-        this.newHabitDate = dateHandler.getCurrentDate();
-        yearText.setText(newHabitDate[0], forAllETexts);
-        monthText.setText(newHabitDate[1], forAllETexts);
-        dayText.setText(newHabitDate[2], forAllETexts);
-
         this.newHabitName = (EditText) findViewById(R.id.newHabitName);
 
         MVC = droidMVC.getInstance();
 
+        resetFields();
+
     }
 
-    // Do not remove this function.
-    // Have it call the droidMVC
     public void newHabitClick(View view) {
 
         Boolean[] daysOfWeek = {false, false, false, false, false, false, false};
@@ -53,23 +50,38 @@ public class newHabitActivity extends AppCompatActivity {
             daysOfWeek[i] = cBox.isChecked();
         }
 
+        if (!Arrays.asList(daysOfWeek).contains(true)) {
+            sendToast("You must select at least one weekday.");
+        }
+
         Integer check = MVC.createNewHabit(this.newHabitName.getText().toString(),
                 this.newHabitDate,
                 daysOfWeek,
                 getApplicationContext());
         if (check == 1) {
-            // THROWING TOASTS BECAUSE HINDLE DID SO IN STUDENT PICKA!
-            Toast.makeText(getApplicationContext(),
-                    "Date format: YYYY-MM-DD", Toast.LENGTH_SHORT).show();
+            sendToast("Date format: YYYY-MM-DD");
         }
 
         else if (check == 2) {
-            Toast.makeText(getApplicationContext(),
-                    "Date fields can only contain numbers", Toast.LENGTH_SHORT).show();
+            sendToast("Date fields can only contain numbers");
         }
 
         else {
-
+            resetFields();
         }
+    }
+
+    public void sendToast(String t) {
+        Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
+    }
+    public void resetFields() {
+        for (int i = 0; i < 7; i++) {
+            ((CheckBox) findViewById(daysInAWeek[i])).setChecked(false);
+        }
+        this.newHabitDate = dateHandler.getCurrentDate();
+        this.yearText.setText(newHabitDate[0], forAllETexts);
+        this.monthText.setText(newHabitDate[1], forAllETexts);
+        this.dayText.setText(newHabitDate[2], forAllETexts);
+        this.newHabitName.setText(null);
     }
 }

@@ -11,7 +11,7 @@
     tools:context="com.example.keith.kgmills_habittracker.newHabitActivity">
 
     <TextView
-        android:text="Enter a new habit:"
+        android:text="@string/enterNew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -23,16 +23,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/newHabitName"
         android:layout_below="@+id/newHabitBanner"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Name:" />
+        android:hint="@string/newName" />
 
     <TextView
-        android:text="Days of the week?"
+        android:text="@string/days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -42,7 +41,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <CheckBox
-        android:text="Sunday"
+        android:text="@string/Sunday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/daysTitle"
@@ -51,7 +50,7 @@
         android:layout_alignParentStart="true" />
 
     <CheckBox
-        android:text="Wednesday"
+        android:text="@string/Wednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tuesdaySwitch"
@@ -60,7 +59,7 @@
         android:layout_alignParentEnd="true" />
 
     <CheckBox
-        android:text="Thursday"
+        android:text="@string/Thursday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/wednesdaySwitch"
@@ -69,7 +68,7 @@
         android:layout_alignParentEnd="true" />
 
     <CheckBox
-        android:text="Saturday"
+        android:text="@string/Saturday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fridaySwitch"
@@ -78,7 +77,7 @@
         android:layout_alignParentEnd="true" />
 
     <CheckBox
-        android:text="Friday"
+        android:text="@string/Friday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fridaySwitch"
@@ -87,7 +86,7 @@
         android:layout_alignParentEnd="true" />
 
     <CheckBox
-        android:text="Monday"
+        android:text="@string/Monday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mondaySwitch"
@@ -96,7 +95,7 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Optional: Choose Date"
+        android:text="@string/optional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/saturdaySwitch"
@@ -105,7 +104,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <Button
-        android:text="Create New Habit"
+        android:text="@string/createNew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -118,7 +117,6 @@
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:layout_below="@+id/dateBanner"
         android:layout_alignParentStart="true"
@@ -126,7 +124,7 @@
         android:selectAllOnFocus="false" />
 
     <CheckBox
-        android:text="Tuesday"
+        android:text="@string/Tuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tuesdaySwitch"
@@ -138,7 +136,6 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/dayEditText"
         android:layout_alignBaseline="@+id/monthEditText"
@@ -149,7 +146,6 @@
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/monthEditText"
         android:layout_below="@+id/dateBanner"

@@ -11,7 +11,7 @@
     tools:context="com.example.keith.kgmills_habittracker.deleteHabitActivity">
 
     <Button
-        android:text="DELETE"
+        android:text="@string/del"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -20,7 +20,6 @@
         android:layout_alignParentEnd="true"
         android:onClick="deleteHabit" />
 
-    // http://stackoverflow.com/questions/3156781/how-to-show-android-checkbox-at-right-side
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:button="@null"
-        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+        android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -39,7 +38,6 @@
         android:id="@+id/deleteHabitsListView" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
