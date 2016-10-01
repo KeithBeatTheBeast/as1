@@ -78,8 +78,4 @@ public class HabitController {
     public ArrayList<Habit> getActiveHabits() {
         return activeHabits;
     }
-
-    public Integer getCurrentDayOfWeek() {
-        return currentDayOfWeek;
-    }
 }

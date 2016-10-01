@@ -12,64 +12,53 @@ import android.widget.TextView;
 
 public class deleteHabitActivity extends AppCompatActivity {
 
-    private ListView deleteHabitsListView;
-    private HabitController hCtl = new HabitController();
+    private ListView delListView;
     private TextView.BufferType forAllETexts = TextView.BufferType.EDITABLE;
     private ArrayAdapter<Habit> adapter;
-    private CheckBox deleteConfirm;
-    private Button commitDeleteButton;
-    private TextView deleteText;
-    private int indexToDelete = -1;
+    private CheckBox delConfirm;
+    private Button delCommit;
+    private TextView delText;
+    private droidMVC MVC;
 
-    // REMOVE LATER ONLY FOR TESTING/DESIGNING
-    private static final Boolean[] daysInAWeek = {false, true, true, true, true, true, false};
-    private String name = "aNewName";
-    private static final String testDate = "1995-01-25";
-    private Habit testHabit = new Habit(name, testDate, daysInAWeek);
-    private Habit anotherTestHabit = new Habit("Another", testDate, daysInAWeek);
-
-    // Maybe implement on click listener for Clickbox
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_habit);
+        MVC = droidMVC.getInstance();
 
         // http://stackoverflow.com/questions/14802354/how-to-reset-a-buttons-background-color-to-default for button color changes
-        deleteHabitsListView = (ListView) findViewById(R.id.deleteHabitsListView);
-        deleteConfirm = (CheckBox) findViewById(R.id.deleteConfirmationCheck);
-        commitDeleteButton = (Button) findViewById(R.id.finalDeleteButton);
-        deleteText = (TextView) findViewById(R.id.deleteText);
-        deleteText.setText("Select a habit to delete", forAllETexts);
-        hCtl.addAHabit(testHabit);
-        hCtl.addAHabit(anotherTestHabit);
-        adapter = new ArrayAdapter<Habit>(this, R.layout.delete_item, hCtl.getAllHabits());
-        deleteHabitsListView.setAdapter(adapter);
-        commitDeleteButton.setClickable(false);
-        commitDeleteButton.setBackgroundColor(0x00000000);
-        deleteConfirm.setEnabled(false);
+        delConfirm = (CheckBox) findViewById(R.id.deleteConfirmationCheck);
+        delConfirm.setEnabled(false);
 
+        delCommit = (Button) findViewById(R.id.finalDeleteButton);
+        delCommit.setClickable(false);
+        delCommit.setBackgroundColor(0x00000000);
 
-        deleteHabitsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        delText = (TextView) findViewById(R.id.deleteText);
+        delText.setText("Select a habit to delete", forAllETexts);
 
+        delListView = (ListView) findViewById(R.id.deleteHabitsListView);
+        adapter = MVC.setAdapter(this, getApplicationContext());
+        delListView.setAdapter(adapter);
+
+        delListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?>adapt, View v, int position, long l) {
-                String rDelete = "Really delete " + hCtl.getAllHabits().get(position).getName() + "?";
-                deleteText.setText(rDelete, forAllETexts);
-                indexToDelete = position;
-                deleteConfirm.setEnabled(true);
+                delText.setText(MVC.askForConfirmation(position), forAllETexts);
+                delConfirm.setEnabled(true);
             }
         });
 
-        deleteConfirm.setOnClickListener(new View.OnClickListener() {
+        delConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (deleteConfirm.isChecked() && indexToDelete > -1) {
-                    commitDeleteButton.setClickable(true);
-                    commitDeleteButton.setBackgroundResource(android.R.drawable.btn_default);
+                if (delConfirm.isChecked()) {
+                    delCommit.setClickable(true);
+                    delCommit.setBackgroundResource(android.R.drawable.btn_default);
                 }
 
                 else {
-                    commitDeleteButton.setBackgroundColor(0x00000000);
-                    commitDeleteButton.setClickable(false);
+                    delCommit.setBackgroundColor(0x00000000);
+                    delCommit.setClickable(false);
                 }
             }
 
@@ -77,16 +66,19 @@ public class deleteHabitActivity extends AppCompatActivity {
     }
 
     public void deleteHabit(View view) {
-        if (deleteConfirm.isChecked()) {
-            hCtl.getAllHabits().remove(this.indexToDelete);
-            adapter.notifyDataSetChanged();
-            commitDeleteButton.setBackgroundColor(0x00000000);
-            commitDeleteButton.setClickable(false);
-            deleteConfirm.setChecked(false);
-            indexToDelete = -1;
-            deleteText.setText("Select a habit to delete", forAllETexts);
-            deleteConfirm.setEnabled(false);
-        }
+       // if (delConfirm.isChecked()) {
+        MVC.delSelectedHabit(getApplicationContext());
+        adapter.notifyDataSetChanged();
+
+        delCommit.setBackgroundColor(0x00000000);
+        delCommit.setClickable(false);
+
+        delConfirm.setChecked(false);
+        delConfirm.setEnabled(false);
+
+        delText.setText("Select a habit to delete", forAllETexts);
+
+       // }
     }
 
 }

@@ -1,9 +1,5 @@
 package com.example.keith.kgmills_habittracker;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-
 /**
  * Created by keith on 9/24/2016.
  * Core class of Assignment 1: Habit
@@ -104,8 +100,8 @@ public class Habit {
     @Override
     public String toString() {
         if (this.dailyCompletion) {
-            return this.name + " | Done.";
+            return this.name + " | Complete.";
         }
-        return this.name + " | Incomplete.";
+        return this.name;
     }
 }
