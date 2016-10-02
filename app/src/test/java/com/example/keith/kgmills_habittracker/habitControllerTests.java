@@ -6,16 +6,17 @@ import java.util.Calendar;
 
 import static org.junit.Assert.*;
 /**
- * Created by keith on 9/25/2016.
- * JUNIT tests for class HabitController
+ * Created by kgmills
+ * JUnit tests for class HabitController
  */
 
 public class habitControllerTests {
 
-    // Birthday of programmer xD
     private static final String testDate = "1995-01-25";
 
-
+    /**
+     * Check to see if list responds.
+     */
     @Test
     public void testAddAndRemove() {
         HabitController hc = new HabitController();
@@ -26,13 +27,16 @@ public class habitControllerTests {
         assertFalse(hc.getAllHabits().contains(h));
     }
 
+    /**
+     * Check to see if active list responds
+     */
     @Test
     public void testActiveHabits() {
         Calendar cal = Calendar.getInstance();
         Boolean[] today = {false, false, false, false, false, false, false};
         Boolean[] tomorrow = {false, false, false, false, false, false, false};
-        today[cal.get(Calendar.DAY_OF_WEEK)-1] = true;
-        tomorrow[cal.get(Calendar.DAY_OF_WEEK)] = true;
+        today[(cal.get(Calendar.DAY_OF_WEEK)-1)%7] = true;
+        tomorrow[(cal.get(Calendar.DAY_OF_WEEK))%7] = true;
 
         Habit h1 = new Habit("Today's Habit", testDate,
                 today);

@@ -14,7 +14,6 @@ public class habitUnitTests {
     private static final Boolean[] daysInAWeek = {false, true, true, true, true, true, false};
     private String name = "aNewName";
 
-    // Birthday of programmer xD
     private static final String testDate = "1995-01-25";
     private Habit testHabit = new Habit(name, testDate, daysInAWeek);
 

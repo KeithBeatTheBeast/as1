@@ -4,24 +4,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by keith on 9/25/2016.
- I want this class to
- 1. Store habits via an array list
- remove habits
- check to see if the day has changed
- Check to see which habits must be completed when a day changes
- store these new habits in another array list
-
- The active habit list must be emptied completely at the end of a day.
-
- SUN = 1
- MON = 2
- TUE =
- ...
+ * Created by kgmills
+ * Class HabitController
+ * Contains Habits, organizes them based on daily relevance
+ * Tells them when it's a new day.
  */
 
 public class HabitController {
 
+    /**
+     * allHabits is... all habits
+     * activeHabits only those to be done today
+     * Current day of week, 1-7
+     */
     private ArrayList<Habit> allHabits;
     private ArrayList<Habit> activeHabits;
     private Integer currentDayOfWeek;
@@ -34,6 +29,11 @@ public class HabitController {
         this.currentDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
     }
 
+    /**
+     * Adds habit to all, refreshes active to see if it's included
+     * If it is included, tell it to write a "0" to it's log for today.
+     * @param habit: The habit to be entered
+     */
     public void addAHabit(Habit habit) {
         allHabits.add(habit);
         this.refreshRelevantHabits();
@@ -42,11 +42,19 @@ public class HabitController {
         }
     }
 
+    /**
+     * Removes habit from all, refreshes active to get rid of it too
+     * @param habit: Habit to be removed
+     */
     public void removeAHabit(Habit habit) {
         allHabits.remove(habit);
         this.refreshRelevantHabits();
     }
 
+    /**
+     * See if it's a new day.
+     * If it is, tell the habits for this day to add a new entry to their logs.
+     */
     public void checkDayOfWeek() {
         Calendar cal = Calendar.getInstance();
         if (!this.currentDayOfWeek.equals(cal.get(Calendar.DAY_OF_WEEK))){
@@ -59,6 +67,10 @@ public class HabitController {
         }
     }
 
+    /**
+     * Refreshes active habits so that only those in allHabits
+     * and that are active today are presented
+     */
     private void refreshRelevantHabits() {
         this.activeHabits.clear();
         for (Habit h: allHabits) {
@@ -68,12 +80,16 @@ public class HabitController {
         }
     }
 
+    /**
+     * Tells all habits in active habits it's a new day.
+     */
     private void newDay() {
         for (Habit h: activeHabits) {
             h.newDayCheck();
         }
     }
 
+    // Getters
     public ArrayList<Habit> getAllHabits() {
         return allHabits;
     }

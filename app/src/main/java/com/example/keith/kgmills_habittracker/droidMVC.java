@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 /**
- * Created by keith
+ * Created by kgmills
  * Singleton.
  */
 

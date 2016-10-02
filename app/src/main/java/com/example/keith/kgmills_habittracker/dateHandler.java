@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by keith on 9/26/2016.
+ * Created by kgmills
  * A static class that is used when creating habits typically.
  *  Be sure to go through this class and
  * account for days and months that don't exist..

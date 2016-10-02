@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by keith on 9/26/2016.
+ * Created by kgmills
  * JUNIT Tests for dateHander static class
  */
 
