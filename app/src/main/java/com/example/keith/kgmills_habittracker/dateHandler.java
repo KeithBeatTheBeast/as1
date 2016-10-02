@@ -42,4 +42,9 @@ public final class dateHandler {
     public static String reformatDate(String[] date) {
         return date[0] + "-" + date[1] + "-" + date[2];
     }
+
+    public static String logDate() {
+        String[] s = getCurrentDate();
+        return s[0]+s[1]+s[2];
+    }
 }

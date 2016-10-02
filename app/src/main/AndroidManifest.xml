@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".newHabitActivity" />
-        <activity android:name=".deleteHabitActivity"></activity>
+        <activity android:name=".deleteHabitActivity" />
+        <activity android:name=".deleteCompletionsActivity"></activity>
     </application>
 
 </manifest>

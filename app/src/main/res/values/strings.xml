@@ -15,4 +15,9 @@
     <string name="newName">Name:</string>
     <string name="enterNew">Enter a new habit:</string>
     <string name="del">DELETE</string>
+    <string name="goToComp">Delete Completions</string>
+    <string name="pickdate">Pick a date to delete from</string>
+    <string name="month">M</string>
+    <string name="year">Y</string>
+    <string name="day">D</string>
 </resources>

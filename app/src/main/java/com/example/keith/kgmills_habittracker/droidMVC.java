@@ -26,7 +26,7 @@ public class droidMVC <T extends AppCompatActivity> {
     private static droidMVC ourInstance = new droidMVC();
     private static final String HABITFILE = "habitFile.sav";
     private HabitController hCtl;
-    private int indexToDelete = -1;
+    private int index = -1;
     private droidMVC() {}
     public static droidMVC getInstance() {
         return ourInstance;
@@ -46,17 +46,17 @@ public class droidMVC <T extends AppCompatActivity> {
     }
 
     public String mainLongClick(int pos) {
-        this.indexToDelete = pos;
+        this.index = pos;
         return hCtl.getActiveHabits().get(pos).sendCompletionInfo();
     }
 
     public String askForConfirmation(int i) {
-        this.indexToDelete = i;
+        this.index = i;
         return "Really delete " + hCtl.getAllHabits().get(i).getName() + "?";
     }
 
     public void delSelectedHabit(Context context) {
-        hCtl.removeAHabit(hCtl.getAllHabits().get(this.indexToDelete));
+        hCtl.removeAHabit(hCtl.getAllHabits().get(this.index));
         saveInFile(context);
     }
 
@@ -74,6 +74,23 @@ public class droidMVC <T extends AppCompatActivity> {
         return 0;
     }
 
+    public String[] habitInfo() {
+        Habit toBeEdited = hCtl.getAllHabits().get(this.index);
+
+        return new String[] {toBeEdited.getName(),
+                toBeEdited.getDateOfCreation()};
+    }
+
+    public Integer removal(String year, String month, String day, Context context) {
+        loadFromFile(context);
+        Integer whatToSay = dateHandler.parseDate(new String[]{year, month, day});
+        if (!dateHandler.parseDate(new String[]{year, month, day}).equals(0)) { return whatToSay; }
+
+        String dateToRemove = year + month + day;
+        whatToSay = hCtl.getAllHabits().get(this.index).getMyLog().removeCompletion(dateToRemove);
+        saveInFile(context);
+        return whatToSay;
+    }
 
     private void loadFromFile(Context context) {
         try {

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_delete_completions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.keith.kgmills_habittracker.deleteCompletionsActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/nameOfHabit"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameOfHabit"
+        android:layout_alignParentStart="true"
+        android:id="@+id/createDate"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/delMonthEditText"
+        android:layout_alignBaseline="@+id/delYearEditText"
+        android:layout_alignBottom="@+id/delYearEditText"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/month" />
+
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/delDayEditText"
+        android:layout_alignBaseline="@+id/delMonthEditText"
+        android:layout_alignBottom="@+id/delMonthEditText"
+        android:layout_alignEnd="@+id/deleteCompleteButton"
+        android:hint="@string/day" />
+
+    <TextView
+        android:text="@string/pickdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickDate"
+        android:layout_above="@+id/delMonthEditText"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteCompleteButton"
+        android:layout_marginTop="55dp"
+        android:onClick="removeACompletion"
+        android:layout_below="@+id/delYearEditText"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/delYearEditText"
+        android:selectAllOnFocus="false"
+        android:layout_marginTop="38dp"
+        android:hint="@string/year"
+        android:layout_below="@+id/createDate"
+        android:layout_toStartOf="@+id/delMonthEditText" />
+
+
+</RelativeLayout>

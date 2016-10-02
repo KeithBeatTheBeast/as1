@@ -1,5 +1,6 @@
 package com.example.keith.kgmills_habittracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ public class deleteHabitActivity extends AppCompatActivity {
     private ArrayAdapter<Habit> adapter;
     private CheckBox delConfirm;
     private Button delCommit;
+    private Button delCompletes;
     private TextView delText;
     private droidMVC MVC;
 
@@ -34,6 +36,9 @@ public class deleteHabitActivity extends AppCompatActivity {
         delCommit.setClickable(false);
         delCommit.setBackgroundColor(0x00000000);
 
+        delCompletes = (Button) findViewById(R.id.goToCompletes);
+        delCompletes.setClickable(false);
+
         delText = (TextView) findViewById(R.id.deleteText);
         delText.setText("Select a habit to delete", forAllETexts);
 
@@ -46,6 +51,7 @@ public class deleteHabitActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?>adapt, View v, int position, long l) {
                 delText.setText(MVC.askForConfirmation(position), forAllETexts);
                 delConfirm.setEnabled(true);
+                delCompletes.setClickable(true);
             }
         });
 
@@ -79,6 +85,12 @@ public class deleteHabitActivity extends AppCompatActivity {
         delText.setText("Select a habit to delete", forAllETexts);
 
        // }
+    }
+
+    public void activitiesIntent(View view) {
+        delCompletes.setClickable(false);
+        Intent completions = new Intent(this, deleteCompletionsActivity.class);
+        startActivity(completions);
     }
 
 }

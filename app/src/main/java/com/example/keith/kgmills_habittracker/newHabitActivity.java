@@ -54,15 +54,18 @@ public class newHabitActivity extends AppCompatActivity {
             sendToast("You must select at least one weekday.");
         }
 
+        this.newHabitDate[0] = this.yearText.getText().toString();
+        this.newHabitDate[1] = this.monthText.getText().toString();
+        this.newHabitDate[2] = this.dayText.getText().toString();
         Integer check = MVC.createNewHabit(this.newHabitName.getText().toString(),
                 this.newHabitDate,
                 daysOfWeek,
                 getApplicationContext());
-        if (check == 1) {
+        if (check.equals(1)) {
             sendToast("Date format: YYYY-MM-DD");
         }
 
-        else if (check == 2) {
+        else if (check.equals(2)) {
             sendToast("Date fields can only contain numbers");
         }
 

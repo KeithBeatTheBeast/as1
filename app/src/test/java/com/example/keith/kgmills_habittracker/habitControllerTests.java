@@ -27,15 +27,6 @@ public class habitControllerTests {
     }
 
     @Test
-    public void testCheckDay() {
-        HabitController hc = new HabitController();
-        Calendar cal = Calendar.getInstance();
-        assertTrue(hc.getCurrentDayOfWeek().equals(cal.get(Calendar.DAY_OF_WEEK)));
-        hc.checkDayOfWeek();
-        assertTrue(hc.getCurrentDayOfWeek().equals(cal.get(Calendar.DAY_OF_WEEK)));
-    }
-
-    @Test
     public void testActiveHabits() {
         Calendar cal = Calendar.getInstance();
         Boolean[] today = {false, false, false, false, false, false, false};

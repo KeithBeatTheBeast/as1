@@ -1,92 +1,107 @@
 package com.example.keith.kgmills_habittracker;
 
 /**
- * Created by keith on 9/24/2016.
+ * Created by kgmills
  * Core class of Assignment 1: Habit
+ *
+ * TO-DO:
+ * Implement activity for log.
+ * Equals function for assisting input/denying multiple of same habit.
+ * Implement equals into droidMVC
+ * Habit must not become active before create day.
+ * Unit tests
+ * Comments
+ * UML.
+ * Compiled apk
  */
 
 public class Habit {
 
-    private String name;               // As per
-    private String dateOfCreation;     // assignment
-    private Boolean[] daysOfWeek;       // specifications
-    private Boolean dailyCompletion;   // Checks if habit complete during day
-    private Integer daysToComplete;    // Number of relevant days since creation
-    private Integer daysComplete;      // Days complete since creation
-    private Integer daysMissed;        // Days missed since creation
-    private Integer overTimeToday;     // Times additionally completed before reset.
-    private Integer overTimeDays;      // For instances when habit is completed twice or more
-                                       // in one day
+    private String name;              // As per
+    private String dateOfCreation;    // assignment
+    private Boolean[] daysOfWeek;     // specifications
+    private Boolean dailyCompletion;  // Checks if habit complete during day
+    private Integer completesToday;   // If done today
+    private HabitLog myLog;           // Log of activity
+
     // Simple constructor
     public Habit(String name, String DoC, Boolean[] days) {
         this.name = name;
         this.dateOfCreation = DoC;
         this.daysOfWeek = days;
         this.dailyCompletion = false;
-        this.daysToComplete = 1;
-        this.daysComplete= 0;
-        this.daysMissed = 0;
-        this.overTimeToday = 0;
-        this.overTimeDays = 0;
+        this.completesToday = 0;
+        this.myLog = new HabitLog();
+
     }
 
-    // Called when user declares a task complete
+    /**
+     * Called by GUI through MVC
+     * Says it's done for today
+     * And posts changes to log.
+     */
     public void completion(){
-
-        // If you haven't done the habit yet
-        if (!this.dailyCompletion) {
-            this.dailyCompletion = true;
-            this.daysComplete += 1;
-        }
-        // If you have
-        else {
-            this.overTimeToday += 1;
-            this.overTimeDays += 1;
-        }
+        this.dailyCompletion = true;
+        this.completesToday += 1;
+        this.myLog.writeToLog(dateHandler.logDate(),
+                this.completesToday);
     }
 
-    // Check if this is a day I want to do the habit.
+    /**
+     * Used by HabitController to decide who is active
+     * @param day: 1 is Sunday, 2 is Mon, ...., 7 is sat
+     * @return Do I complete this habit on this day?
+     */
     public Boolean isWorkingDay(Integer day) {
         return this.daysOfWeek[(day-1) % daysOfWeek.length];
     }
 
-    // Called when a new day I want to complete a habit happens
+    /**
+     * If we didn't complete the habit today write a 0
+     * for the entry.
+     * It's a new day so reset things.
+     */
     public void newDayCheck() {
 
         if (!this.dailyCompletion) {
-            this.daysMissed += 1;
+            this.myLog.writeToLog(dateHandler.logDate(),
+                    0);
         }
-
-        this.daysToComplete += 1;
         this.dailyCompletion = false;
-        this.overTimeToday = 0;
+        this.completesToday = 0;
     }
 
-    // Info to user typically done through a toast. Here is the string for it.
+    /**
+     * Called by GUI through MVC to get info about habit.
+     * @return A string that will be used to toast.
+     */
     public String sendCompletionInfo() {
-
+        String[] info = this.myLog.getCumulativeInfo();
         return "Habit created on " + this.dateOfCreation + ". " +
-                "Days for habit complete: " + this.daysComplete.toString() +
-                "/" + this.daysToComplete.toString() + ". " +
-                "Days missed: " + this.daysMissed.toString() +
-                ". Overtime: " + this.overTimeDays.toString();
+                "Days for habit complete: " + info[1] + "/" +
+                info[0] + ". " + "Total completes: " + info[2] +
+                ". ";
     }
 
+    /**
+     * Used for ArrayAdapters
+     * @return String with name and completion/overtime status
+     */
     @Override
     public String toString() {
         String answer = this.name;
         if (this.dailyCompletion) {
             answer += " | Complete";
         }
-        if (this.overTimeToday > 0) {
+        if (this.completesToday > 1) {
             answer += " with " +
-                    this.overTimeToday +
+                    (this.completesToday-1) +
                     " overtime.";
         }
         return answer;
     }
 
-    // Standard getters, used for JUNIT testing
+    // Standard getters, used for JUNIT testing mostly
     public String getName() {
         return this.name;
     }
@@ -95,23 +110,5 @@ public class Habit {
         return dateOfCreation;
     }
 
-    public Boolean getDailyCompletion() {
-        return dailyCompletion;
-    }
-
-    public Integer getDaysToComplete() {
-        return daysToComplete;
-    }
-
-    public Integer getDaysComplete() {
-        return daysComplete;
-    }
-
-    public Integer getDaysMissed() {
-        return daysMissed;
-    }
-
-    public Integer getOverTimeDays() {
-        return overTimeDays;
-    }
+    public HabitLog getMyLog() { return this.myLog; }
 }

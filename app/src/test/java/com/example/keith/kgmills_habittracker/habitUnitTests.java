@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by keith on 9/24/2016.
+ * Created by kgmills
  * JUNIT tests for class Habit
  */
 
@@ -30,9 +30,11 @@ public class habitUnitTests {
         assertTrue(testHabit.getDateOfCreation().equals(testDate));
     }
 
+    /**
+     * This habit should only be active Mon-Fri
+     */
     @Test
     public void testDays() {
-
         assertFalse(testHabit.isWorkingDay(1));
         assertTrue(testHabit.isWorkingDay(2));
         assertTrue(testHabit.isWorkingDay(3));
@@ -42,54 +44,29 @@ public class habitUnitTests {
         assertFalse(testHabit.isWorkingDay(7));
     }
 
-    // Test values off the bat of creation
+    /**
+     * Complete
+     * See that there is one entry
+     * See that the entry can be removed
+     * Trigger two more checks
+     * Make sure there's one entry but it's empty.
+     */
     @Test
-    public void testInitialCompletion() {
-        Habit habit = new Habit(name, testDate, daysInAWeek);
-        assertFalse(habit.getDailyCompletion());
-        assertEquals(1, (long)habit.getDaysToComplete());
-        assertEquals(0, (long)habit.getDaysComplete());
-        assertEquals(0, (long)habit.getDaysMissed());
-        assertEquals(0, (long)habit.getOverTimeDays());
+    public void testCompletion() {
+        testHabit.newDayCheck();
+        testHabit.completion();
+        HabitLog h = testHabit.getMyLog();
+        Integer[] a = h.getCumulativeInfoInInts();
+        assertEquals(1, (long)a[0]);
+        assertEquals(1, (long)a[1]);
+        assertEquals(1, (long)a[2]);
+        assertEquals(0, (long)h.removeCompletion(dateHandler.logDate()));
+        testHabit.newDayCheck();
+        testHabit.newDayCheck();
+        a = h.getCumulativeInfoInInts();
+        assertEquals(1, (long)a[0]);
+        assertEquals(0, (long)a[1]);
+        assertEquals(0, (long)a[2]);
+        assertEquals(4, (long)h.removeCompletion(dateHandler.logDate()));
     }
-
-    // Test after completing a habit
-    @Test
-    public void testGoodDay() {
-        Habit habit = new Habit(name, testDate, daysInAWeek);
-        habit.completion();
-        assertTrue(habit.getDailyCompletion());
-        assertEquals(1, (long)habit.getDaysToComplete());
-        assertEquals(1, (long)habit.getDaysComplete());
-        assertEquals(0, (long)habit.getDaysMissed());
-        assertEquals(0, (long)habit.getOverTimeDays());
-    }
-
-    // Test after failing to complete a habit
-    @Test
-    public void testBadDay() {
-        Habit habit = new Habit(name, testDate, daysInAWeek);
-        habit.newDayCheck();
-        assertFalse(habit.getDailyCompletion());
-        assertEquals(2, (long)habit.getDaysToComplete());
-        assertEquals(0, (long)habit.getDaysComplete());
-        assertEquals(1, (long)habit.getDaysMissed());
-        assertEquals(0, (long)habit.getOverTimeDays());
-    }
-
-    // Test after completing a habit twice in one day.
-    @Test
-    public void testOverTime() {
-        Habit habit = new Habit(name, testDate, daysInAWeek);
-        habit.completion();
-        habit.completion();
-        habit.newDayCheck();
-        assertFalse(habit.getDailyCompletion());
-        assertEquals(2, (long)habit.getDaysToComplete());
-        assertEquals(1, (long)habit.getDaysComplete());
-        assertEquals(0, (long)habit.getDaysMissed());
-        assertEquals(1, (long)habit.getOverTimeDays());
-    }
-
-
 }

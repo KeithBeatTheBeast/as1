@@ -37,6 +37,9 @@ public class HabitController {
     public void addAHabit(Habit habit) {
         allHabits.add(habit);
         this.refreshRelevantHabits();
+        if (this.activeHabits.contains(habit)) {
+            habit.newDayCheck();
+        }
     }
 
     public void removeAHabit(Habit habit) {
