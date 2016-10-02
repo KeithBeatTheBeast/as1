@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by kgmills
+ * Last Edit: Oct 2 2016
  * CLASS HabitLog
  * Responsible for holding data regarding
  * a habit's completions.

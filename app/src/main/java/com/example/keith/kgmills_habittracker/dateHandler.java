@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by kgmills
+ * Last Edit: Oct 2 2016
  * A static class that is used when creating habits typically.
  *  Be sure to go through this class and
  * account for days and months that don't exist..

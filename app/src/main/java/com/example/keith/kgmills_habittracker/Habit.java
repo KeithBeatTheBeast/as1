@@ -2,17 +2,8 @@ package com.example.keith.kgmills_habittracker;
 
 /**
  * Created by kgmills
+ * Last Edit: Oct 2 2016
  * Core class of Assignment 1: Habit
- *
- * TO-DO:
- * Implement activity for log.
- * Equals function for assisting input/denying multiple of same habit.
- * Implement equals into droidMVC
- * Habit must not become active before create day.
- * Unit tests
- * Comments
- * UML.
- * Compiled apk
  */
 
 public class Habit {

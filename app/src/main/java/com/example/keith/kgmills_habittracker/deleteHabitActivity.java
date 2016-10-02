@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 /**
  * Created by Kgmills
+ * Last Edit: Oct 2 2016
  * Activity for deleting entire habits
  * The user will select an existing habit (all of them,
  * not just the actives) from an ArrayAdapter.

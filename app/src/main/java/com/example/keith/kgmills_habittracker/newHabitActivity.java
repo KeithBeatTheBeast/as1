@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 /**
  * Created by Kgmills
+ * Last Edit: Oct 2 2016
  * Activity called by habitsViewActivity
  * responsible for GUI interface that relays information about
  * new habits to the MVC.

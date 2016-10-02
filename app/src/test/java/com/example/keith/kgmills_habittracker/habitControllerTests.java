@@ -7,6 +7,7 @@ import java.util.Calendar;
 import static org.junit.Assert.*;
 /**
  * Created by kgmills
+ * Last Edit: Oct 2 2016
  * JUnit tests for class HabitController
  */
 

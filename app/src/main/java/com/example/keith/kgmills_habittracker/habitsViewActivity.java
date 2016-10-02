@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 /**
  * Created by Kgmills
+ * Last Edit: Oct 2 2016
  * Main activity of Kgmills-HabitTracker
  * Shows active habits for the day, provides ability to
  * complete them, see their status, and branch to either

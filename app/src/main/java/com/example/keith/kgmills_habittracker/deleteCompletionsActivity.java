@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 /**
  * Created by Kgmills
+ * Last Edit: Oct 2 2016
  * Activity for deleting completions of Habits.
  * Reached by habitsViewActivity->deleteHabitActivity->here
  *

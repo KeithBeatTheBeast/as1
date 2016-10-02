@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 /**
  * Created by kgmills
+ * Last Edit: Oct 2 2016
  * Class HabitController
  * Contains Habits, organizes them based on daily relevance
  * Tells them when it's a new day.
