@@ -11,17 +11,39 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * Created by Kgmills
+ * Activity for deleting entire habits
+ * The user will select an existing habit (all of them,
+ * not just the actives) from an ArrayAdapter.
+ * They will then be asked if they really want to delete it.
+ * At which point, they have two options:
+ * 1) Hit another button to go to another activity (deleteCompletionsActivity)
+ * to change their completion info
+ * 2) Hit a "yes I do" clickbox, then another button to delete the habit.
+ *
+ * NOTE: For some reason the ArrayAdapter doesn't show the same information
+ * as the arrayadapter in habitsViewActivity. I don't know why, since they both'
+ * rely on the same habitController and MVC.
+ */
 public class deleteHabitActivity extends AppCompatActivity {
 
     private ListView delListView;
     private TextView.BufferType forAllETexts = TextView.BufferType.EDITABLE;
     private ArrayAdapter<Habit> adapter;
-    private CheckBox delConfirm;
-    private Button delCommit;
-    private Button delCompletes;
-    private TextView delText;
+    private CheckBox delConfirm; // Assurance for deletion box.
+    private Button delCommit; // Commits the deletion
+    private Button delCompletes; // Button for going to delete completions page
+    private TextView delText; // Text field above everything
     private droidMVC MVC;
 
+    /**
+     * When the activity starts up one cannot even press any of the switches or buttons
+     * until a habit is selected. Once it is, one can go to it's delete completions page.
+     * Or, they can check the "yes I want to delete it" switch (which previously was inactive)
+     * which will then unlock the button that actually commits the deletion command to the MVC.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +65,28 @@ public class deleteHabitActivity extends AppCompatActivity {
         delText.setText("Select a habit to delete", forAllETexts);
 
         delListView = (ListView) findViewById(R.id.deleteHabitsListView);
-        adapter = MVC.setAdapter(this, getApplicationContext());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.adapter = MVC.setAdapter(this, getApplicationContext());
         delListView.setAdapter(adapter);
 
+        // Listener for ArrayAdapter
         delListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?>adapt, View v, int position, long l) {
+                // Give the MVC the index of the Habit that will be deleted/modified
+                // It will remember until you change that.
                 delText.setText(MVC.askForConfirmation(position), forAllETexts);
                 delConfirm.setEnabled(true);
                 delCompletes.setClickable(true);
             }
         });
 
+        // Listener for checkbox
+        // Unlocks button that commits delete.
         delConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (delConfirm.isChecked()) {
@@ -71,6 +103,7 @@ public class deleteHabitActivity extends AppCompatActivity {
         });
     }
 
+    // Commit delete button.
     public void deleteHabit(View view) {
        // if (delConfirm.isChecked()) {
         MVC.delSelectedHabit(getApplicationContext());
@@ -87,6 +120,7 @@ public class deleteHabitActivity extends AppCompatActivity {
        // }
     }
 
+    // Go to delete a Habit's completions.
     public void activitiesIntent(View view) {
         delCompletes.setClickable(false);
         Intent completions = new Intent(this, deleteCompletionsActivity.class);

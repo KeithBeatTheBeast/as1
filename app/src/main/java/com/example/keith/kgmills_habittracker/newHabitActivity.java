@@ -10,8 +10,19 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
+/**
+ * Created by Kgmills
+ * Activity called by habitsViewActivity
+ * responsible for GUI interface that relays information about
+ * new habits to the MVC.
+ */
 public class newHabitActivity extends AppCompatActivity {
 
+    /**
+     * A new date, the MVC, a variable that makes toasts easier,
+     * Texts for the yyyy-MM-dd, name of new habit, and the 7
+     * day switches
+     */
     private String[] newHabitDate;
     private droidMVC MVC;
     private TextView.BufferType forAllETexts = TextView.BufferType.EDITABLE;
@@ -38,18 +49,28 @@ public class newHabitActivity extends AppCompatActivity {
 
         MVC = droidMVC.getInstance();
 
+        // Sets everything up.
         resetFields();
-
     }
 
+    /**
+     * On click for "create new habit" button
+     * Does all the "grab information from GUI" stuff necessary
+     * and gives it to the MVC.
+     * DID not have the days of the week parsing in MVC because it doesn't handle
+     * Checkboxes cleanly.
+     * @param view Required
+     */
     public void newHabitClick(View view) {
 
+        // What days of the week will the habit operate?
         Boolean[] daysOfWeek = {false, false, false, false, false, false, false};
         for (int i = 0; i < 7; i++) {
             CheckBox cBox = (CheckBox) findViewById(daysInAWeek[i]);
             daysOfWeek[i] = cBox.isChecked();
         }
 
+        // If no boxes checked throw a toast.
         if (!Arrays.asList(daysOfWeek).contains(true)) {
             sendToast("You must select at least one weekday.");
         }
@@ -69,14 +90,24 @@ public class newHabitActivity extends AppCompatActivity {
             sendToast("Date fields can only contain numbers");
         }
 
+        // Resets fields of things went well.
         else {
             resetFields();
         }
     }
 
+    /**
+     * Makes the process of firing off a toast easier.
+     * @param t String to be toasted
+     */
     public void sendToast(String t) {
         Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Sets all checkboxes to false
+     * CLear fields
+     */
     public void resetFields() {
         for (int i = 0; i < 7; i++) {
             ((CheckBox) findViewById(daysInAWeek[i])).setChecked(false);

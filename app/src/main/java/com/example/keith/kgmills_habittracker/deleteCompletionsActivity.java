@@ -8,9 +8,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Created by Kgmills
+ * Activity for deleting completions of Habits.
+ * Reached by habitsViewActivity->deleteHabitActivity->here
+ *
+ * Note: Doesn't actually work. Tried my best to implement it, but for some reason
+ * whenever I call delete on a date that has had completions made to it
+ * it says there are none.
+ */
 public class deleteCompletionsActivity extends AppCompatActivity {
 
-    private TextView.BufferType forAllETexts = TextView.BufferType.EDITABLE;
     private droidMVC MVC;
     private TextView nameOfHabit;
     private TextView createDate;
@@ -31,12 +39,21 @@ public class deleteCompletionsActivity extends AppCompatActivity {
         this.delD = (EditText) findViewById(R.id.delDayEditText);
         this.confirm = (Button) findViewById(R.id.deleteCompleteButton);
         this.MVC = droidMVC.getInstance();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         String[] textFiller = this.MVC.habitInfo();
         this.nameOfHabit.setText(textFiller[0]);
         this.createDate.setText(textFiller[1]);
     }
 
+    /**
+     * On click for delete button.
+     * Posts data to MVC which will respond if there are errors or if everything wenr alright.
+     * Then relays information to user.
+     */
     public void removeACompletion(View view) {
         Integer whatToSay = MVC.removal(this.delY.getText().toString(),
                 this.delM.getText().toString(),

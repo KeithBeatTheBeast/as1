@@ -10,6 +10,10 @@ import static org.junit.Assert.*;
 
 public class dateHandlerTests {
 
+    /**
+     * Test the parsing function
+     * uses Equals because I needed multiple error codes
+     */
     @Test
     public void testParseFunction() {
         String[] validString = {"1995", "01", "25"};
@@ -27,12 +31,9 @@ public class dateHandlerTests {
                 Long.valueOf(dateHandler.parseDate(inValidString3)));
     }
 
-    @Test
-    public void testCurrentDate() {
-        // Check it by looking at the console and comparing to computer clock.
-        System.out.println(dateHandler.getCurrentDate());
-    }
-
+    /**
+     * Test reformat function. See if it can go back and forth.
+     */
     @Test
     public void testReformat() {
         String[] testStringArray = {"1995", "01", "25"};

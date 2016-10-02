@@ -9,11 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+/**
+ * Created by Kgmills
+ * Main activity of Kgmills-HabitTracker
+ * Shows active habits for the day, provides ability to
+ * complete them, see their status, and branch to either
+ * create new habits, or delete habits/their completions
+ */
 public class habitsViewActivity extends AppCompatActivity {
 
     private ListView activeHabitsListView;
     private ArrayAdapter<Habit> adapter;
-    private droidMVC MVC;
+    private droidMVC MVC; // Singleton
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,12 @@ public class habitsViewActivity extends AppCompatActivity {
         MVC = droidMVC.getInstance();
     }
 
+    /**
+     * I had to fiddle around with the adapter a bit to get it to work properly
+     * We set it everytime and notify of changes.
+     * We have an onClickListener for completing habits
+     * and an onLongClickListener for getting their statuses.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -30,7 +44,6 @@ public class habitsViewActivity extends AppCompatActivity {
         activeHabitsListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        // http://stackoverflow.com/questions/21295328/android-listview-with-onclick-items
         activeHabitsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?>adapt, View v, int position, long l) {
@@ -48,11 +61,13 @@ public class habitsViewActivity extends AppCompatActivity {
         });
     }
 
+    // Branch to create new habits
     public void addNewHabitIntent(View view) {
         Intent newHabitIntent = new Intent(this, newHabitActivity.class);
         startActivity(newHabitIntent);
     }
 
+    // Branch to delete habits/their completions
     public void deleteHabitIntent(View view) {
         Intent deleteHabitIntent = new Intent(this, deleteHabitActivity.class);
         startActivity(deleteHabitIntent);
